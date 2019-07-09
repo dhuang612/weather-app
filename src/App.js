@@ -15,7 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Weather forcast</h1>
+        <h1>Weather forecast</h1>
         <DisplayWeather />
       </div>
     );
