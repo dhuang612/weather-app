@@ -41,15 +41,13 @@ class WeatherData extends Component {
     const { list } = result;
     const tempRecording = list.filter(
       ({ dt }) =>
-        dt === '1562760000' ||
-        dt === '1562781600' ||
-        dt === '1562792400' ||
-        dt === '1562814000'
+        dt == '1562760000' ||
+        dt == '1562781600' ||
+        dt == '1562792400' ||
+        dt == '1562814000'
     );
     console.log(tempRecording);
-    list.filter(({ dt }) =>
-      this.setState({ time: this.convertTimefromUnix(dt) })
-    );
+    //currently have the relevant times saved. need to work on the data and remember this.setState is async
 
     list.map(item =>
       this.setState({
