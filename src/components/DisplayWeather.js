@@ -1,6 +1,6 @@
 import React from 'react';
 import './DisplayWeather.css';
-
+import WeatherData from '../api/weatherapi';
 const WeatherInfo = [
   {
     day: 'Monday',
@@ -36,12 +36,14 @@ const WeatherInfo = [
 ];
 
 const DisplayWeather = () => {
+  console.log(WeatherData);
   return WeatherInfo.map(item => (
     <div className="weather">
       <span className="day">{item.day}</span>
       <span className="high">{item.high}</span>
       <span className="low">{item.low}</span>
       <span className="type"> {item.weather}</span>
+      <WeatherData />
     </div>
   ));
 };
