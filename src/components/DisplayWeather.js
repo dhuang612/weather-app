@@ -1,4 +1,5 @@
 import React from 'react';
+import './DisplayWeather.css';
 
 const WeatherInfo = [
   {
@@ -36,11 +37,11 @@ const WeatherInfo = [
 
 const DisplayWeather = () => {
   return WeatherInfo.map(item => (
-    <div>
-      <span>{item.day}</span>
-      {item.high}
-      {item.low}
-      {item.weather}
+    <div className="weather">
+      <span className="day">{item.day}</span>
+      <span className="high">{item.high}</span>
+      <span className="low">{item.low}</span>
+      <span className="type"> {item.weather}</span>
     </div>
   ));
 };
