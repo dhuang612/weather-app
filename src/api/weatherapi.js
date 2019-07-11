@@ -57,16 +57,19 @@ class WeatherData extends Component {
     console.log(list);
     const sortedData = list
       .filter(item => (item.dt_txt = item.dt_txt.startsWith(this.curday('-'))))
-      .map(item => item.main.temp);
-    this.setState({ forecast: sortedData });
-    console.log(sortedData);
+      .map(item => ({ temp: item.main.temp, dt: item.dt }));
+
+    this.setState({
+      forecast: sortedData[0].temp,
+      time: this.convertTimefromUnix(sortedData[0].dt)
+    });
   };
 
   render() {
     return (
       <div>
-        {this.state.forecast}
         <div>{this.state.time}</div>
+        {this.state.forecast}
       </div>
     );
   }
