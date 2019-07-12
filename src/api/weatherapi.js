@@ -18,7 +18,8 @@ class WeatherData extends Component {
     super(props);
     this.state = {
       forecast: [],
-      time: []
+      time: [],
+      weather: ''
     };
   }
 
@@ -57,19 +58,25 @@ class WeatherData extends Component {
     console.log(list);
     const sortedData = list
       .filter(item => (item.dt_txt = item.dt_txt.startsWith(this.curday('-'))))
-      .map(item => ({ temp: item.main.temp, dt: item.dt }));
-
+      .map(item => ({
+        temp: item.main.temp,
+        dt: item.dt,
+        weather: item.weather[0].main
+      }));
+    //console.log(sortedData);
     this.setState({
       forecast: sortedData[0].temp,
-      time: this.convertTimefromUnix(sortedData[0].dt)
+      time: this.convertTimefromUnix(sortedData[0].dt),
+      weather: sortedData[0].weather
     });
   };
 
   render() {
     return (
-      <div>
-        <div>{this.state.time}</div>
+      <div className="ui container">
+        <div className="day">{this.state.time}</div>
         {this.state.forecast}
+        <div>{this.state.weather}</div>
       </div>
     );
   }
