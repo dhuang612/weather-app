@@ -8,6 +8,7 @@ const PATH_BASE = 'https://api.openweathermap.org/';
 const REQ_PATH = 'data/2.5/forecast?';
 const cityID = '5128638';
 const units = 'imperial';
+const cnt = 20;
 
 class WeatherData extends Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class WeatherData extends Component {
     axios(
       `${PATH_BASE}${REQ_PATH}id=${cityID}&APPID=${
         process.env.REACT_APP_WEATHER_API_KEY
-      }&units=${units}`
+      }&units=${units}&cnt=${cnt}`
     )
       .then(result => this.sortData(result.data))
       .catch(err => console.log(err));
@@ -57,13 +58,13 @@ class WeatherData extends Component {
     const { list } = result;
     console.log(list);
     const sortedData = list
-      .filter(item => (item.dt_txt = item.dt_txt.startsWith(this.curday('-'))))
+      .filter(item => item.dt_txt.includes(this.curday('-')))
       .map(item => ({
         temp: item.main.temp,
         dt: item.dt,
         weather: item.weather[0].main
       }));
-    //console.log(sortedData);
+
     this.setState({
       forecast: sortedData[0].temp,
       time: this.convertTimefromUnix(sortedData[0].dt),
