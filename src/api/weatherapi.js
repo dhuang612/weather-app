@@ -53,20 +53,25 @@ class WeatherData extends Component {
     return yyyy + sp + mm + sp + dd;
   };
 
+  /*
+javascript string method .startsWith only returns 1 value
+array.forEach
+-1 returns unique values
+  */
   sortData = result => {
     const { list } = result;
     console.log(list);
     const sortedData = list
-      .filter(item => item.dt_txt.startsWith(this.curday('-')))
+      .filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
       .map(item => ({
         temp: item.main.temp,
-        dt: item.dt,
+        dt: this.convertTimefromUnix(item.dt),
         weather: item.weather[0].main
       }));
     console.log(sortedData);
     this.setState({
       forecast: sortedData[0].temp,
-      time: this.convertTimefromUnix(sortedData[0].dt),
+      time: sortedData[0].dt,
       weather: sortedData[0].weather
     });
   };
