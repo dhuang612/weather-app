@@ -5,3 +5,23 @@ Visual Studio Code
 Developing Components in Isolation
 storybook for React or other 3rd party tools can allow you to see the individual states
 within component
+
+
+
+Child-to-parent communication is a little more complicated. The standard way of doing this is to have the parent pass a function to the child through props. 
+The child then calls this function at some point and passes it a value that the parent is supposed to react to. 
+We then write the functionality for the parent's reaction inside the parent component.
+
+
+
+in the afternoon around 5pm the time no longer matches the filter and breaks
+getting error of undefined temp
+
+
+Array(0)length: 0__proto__: Array(0)
+weatherapi.js:28 TypeError: Cannot read property 'temp' of undefined
+    at WeatherData.sortData (weatherapi.js:69)
+    at weatherapi.js:28
+
+
+ ////   

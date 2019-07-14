@@ -25,11 +25,12 @@ class WeatherData extends Component {
   }
 
   fetchWeatherData = () => {
-    axios(
-      `${PATH_BASE}${REQ_PATH}id=${cityID}&APPID=${
-        process.env.REACT_APP_WEATHER_API_KEY
-      }&units=${units}&cnt=${cnt}`
-    )
+    axios
+      .get(
+        `${PATH_BASE}${REQ_PATH}id=${cityID}&APPID=${
+          process.env.REACT_APP_WEATHER_API_KEY
+        }&units=${units}&cnt=${cnt}`
+      )
       .then(result => this.sortData(result.data))
       .catch(err => console.log(err));
   };
@@ -38,9 +39,7 @@ class WeatherData extends Component {
     const date = new Date(dt * 1000);
     const hours = date.getHours();
     const minutes = '0' + date.getMinutes();
-    const seconds = '0' + date.getSeconds();
-    const formattedTime =
-      hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    const formattedTime = hours + ':' + minutes.substr(-2);
     return formattedTime;
   };
 
@@ -58,13 +57,13 @@ class WeatherData extends Component {
     const { list } = result;
     console.log(list);
     const sortedData = list
-      .filter(item => item.dt_txt.includes(this.curday('-')))
+      .filter(item => item.dt_txt.startsWith(this.curday('-')))
       .map(item => ({
         temp: item.main.temp,
         dt: item.dt,
         weather: item.weather[0].main
       }));
-
+    console.log(sortedData);
     this.setState({
       forecast: sortedData[0].temp,
       time: this.convertTimefromUnix(sortedData[0].dt),
