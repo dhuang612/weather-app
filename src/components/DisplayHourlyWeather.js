@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { hourlyWeather } from '../api/weatherapi';
 
 class HourlyWeather extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      HourlyWeather: [this.props]
+    };
+  }
   componentDidMount() {}
+
   render() {
-    return <div>Hourly data</div>;
+    const { hourlyWeather } = this.state;
+    console.log(this.state.HourlyWeather);
+    console.log(hourlyWeather);
+    return <div>hourly temperatures</div>;
   }
 }
 export default HourlyWeather;
