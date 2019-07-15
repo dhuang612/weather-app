@@ -7,7 +7,8 @@ class DisplayWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHourlyWeather: false
+      showHourlyWeather: false,
+      hourlyWeather: ''
     };
   }
   componentDidMount() {

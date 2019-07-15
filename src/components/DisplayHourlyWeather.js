@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WeatherData from '../api/weatherapi';
+import { hourlyWeather } from '../api/weatherapi';
 
 class HourlyWeather extends Component {
   componentDidMount() {}
