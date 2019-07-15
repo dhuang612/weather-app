@@ -64,6 +64,7 @@ array.forEach
     const sortedData = list
       .filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
       .map(item => ({
+        day: item.dt_txt,
         temp: item.main.temp,
         dt: this.convertTimefromUnix(item.dt),
         weather: item.weather[0].main
@@ -77,15 +78,19 @@ array.forEach
   };
 
   render() {
-    return (
-      <div className="ui container">
-        <div className="day">{this.state.time}</div>
-        {this.state.forecast}
-        <div>{this.state.weather}</div>
-      </div>
-    );
+    if ({ showHourlyWeather: false }) {
+      return (
+        <div className="ui container">
+          <div className="day">{this.state.time}</div>
+          {this.state.forecast}
+          <div>{this.state.weather}</div>
+        </div>
+      );
+    }
+    return <showHourlyWeather />;
   }
 }
+
 export default WeatherData;
 
 /*
