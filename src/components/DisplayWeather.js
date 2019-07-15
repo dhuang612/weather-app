@@ -19,16 +19,13 @@ class DisplayWeather extends Component {
   };
   render() {
     const { showHourlyWeather } = this.state;
-    console.log(this.state.showHourlyWeather);
     if (this.state.showHourlyWeather) {
       return (
         <div className="weather">
           <h1>Current temperature</h1>
-          <button onClick={this.switchToHourly}>
-            Click me to switch to hourly
-          </button>
 
           <WeatherData />
+          <button onClick={this.switchToHourly}>show hourly temperature</button>
         </div>
       );
     } else {

@@ -11,16 +11,18 @@ const units = 'imperial';
 const cnt = 20;
 
 class WeatherData extends Component {
-  componentDidMount() {
-    this.fetchWeatherData();
+  async componentDidMount() {
+    await this.fetchWeatherData();
+
     this.convertTimefromUnix();
   }
   constructor(props) {
     super(props);
     this.state = {
-      forecast: [],
-      time: [],
-      weather: ''
+      currentforecast: '',
+      currenttime: '',
+      currentweather: '',
+      hourlyWeather: []
     };
   }
 
@@ -71,23 +73,33 @@ array.forEach
       }));
     console.log(sortedData);
     this.setState({
-      forecast: sortedData[0].temp,
-      time: sortedData[0].dt,
-      weather: sortedData[0].weather
+      currentforecast: sortedData[0].temp,
+      currenttime: sortedData[0].dt,
+      currentweather: sortedData[0].weather,
+      hourlyWeather: [...sortedData]
     });
+  };
+  hourlyWeatherData = sortedData => {
+    const { hourlyWeather } = this.state;
+    console.log(hourlyWeather);
   };
 
   render() {
-    if ({ showHourlyWeather: false }) {
-      return (
-        <div className="ui container">
-          <div className="day">{this.state.time}</div>
-          {this.state.forecast}
-          <div>{this.state.weather}</div>
-        </div>
-      );
-    }
-    return <showHourlyWeather />;
+    const {
+      currentforecast,
+      currenttime,
+      currentweather,
+      hourlyWeather
+    } = this.state;
+    console.log(currentforecast, currenttime, currentweather);
+    return (
+      <div className="ui container">
+        {this.hourlyWeatherData()}
+        <div className="day">{this.state.currenttime}</div>
+        {this.state.currentforecast}
+        <div>{this.state.currentweather}</div>
+      </div>
+    );
   }
 }
 
@@ -95,5 +107,5 @@ export default WeatherData;
 
 /*
 
-
+const { showHourlyWeather } = this.state;
 */
