@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-
+//refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      HourlyWeather: this.props
+      HourlyWeather: [this.props],
+      tempArr: [],
+      timeArr: [],
+      weatherArr: []
     };
   }
   componentDidMount() {
     this.sortHourlyData();
   }
   sortHourlyData = () => {
-    const dataSet = [].concat(this.state);
-    console.log(dataSet);
+    //an array with 20 objects inside
+    const dataSet = [].concat(this.state.HourlyWeather);
+    const sortInfo = dataSet;
+    console.log(sortInfo);
+    sortInfo.map((item, key) => ({ key: item.day, temp: item.temp }));
+    console.log(sortInfo);
+    this.setState({
+      tempArr: sortInfo.temp
+    });
+    console.log(sortInfo);
   };
 
   render() {
