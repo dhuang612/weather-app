@@ -4,16 +4,36 @@ class HourlyWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      HourlyWeather: [this.props]
+      HourlyWeather: this.props
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    this.sortHourlyData();
+  }
+  sortHourlyData = () => {
+    const dataSet = [].concat(this.state);
+    console.log(dataSet);
+  };
 
   render() {
-    const { hourlyWeather } = this.state;
-    console.log(this.state.HourlyWeather);
-    console.log(hourlyWeather);
-    return <div>hourly temperatures</div>;
+    return <div>Show hourly weather</div>;
   }
 }
 export default HourlyWeather;
+
+/*
+.map(item => ({
+        day: item.dt_txt,
+        temp: item.main.temp,
+        dt: this.convertTimefromUnix(item.dt),
+        weather: item.weather[0].main
+      }));
+
+
+      {dataSet.map(item => ({ temp: item.temp }))}
+
+
+      {dataSet.map(function(item) {
+          return item.temp;
+        })}
+*/
