@@ -4,26 +4,21 @@ class HourlyWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      HourlyWeather: [this.props],
+      HourlyWeather: this.props,
       tempArr: [],
       timeArr: [],
       weatherArr: []
     };
   }
-  componentDidMount() {
-    this.sortHourlyData();
+  async componentDidMount() {
+    await this.sortHourlyData();
   }
   sortHourlyData = () => {
-    //an array with 20 objects inside
     const dataSet = [].concat(this.state.HourlyWeather);
-    const sortInfo = dataSet;
-    console.log(sortInfo);
-    sortInfo.map((item, key) => ({ key: item.day, temp: item.temp }));
-    console.log(sortInfo);
-    this.setState({
-      tempArr: sortInfo.temp
-    });
-    console.log(sortInfo);
+    console.log(dataSet);
+    dataSet.filter((item, i) => console.log(item[i]));
+
+    console.log(dataSet);
   };
 
   render() {
@@ -33,12 +28,7 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
-.map(item => ({
-        day: item.dt_txt,
-        temp: item.main.temp,
-        dt: this.convertTimefromUnix(item.dt),
-        weather: item.weather[0].main
-      }));
+.filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
 
 
       {dataSet.map(item => ({ temp: item.temp }))}
@@ -47,4 +37,7 @@ export default HourlyWeather;
       {dataSet.map(function(item) {
           return item.temp;
         })}
+
+            const { dataSet } = this.props;
+    dataSet.forEach(item => console.log(item));
 */
