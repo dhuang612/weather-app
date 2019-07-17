@@ -14,10 +14,11 @@ class HourlyWeather extends Component {
     await this.sortHourlyData();
   }
   sortHourlyData = () => {
-    const dataSet = [].concat(this.state.HourlyWeather);
-    console.log(dataSet);
-    dataSet.filter((item, i) => console.log(item[i]));
-
+    const dataSet = Object.entries(this.state.HourlyWeather).forEach(
+      ([key, value]) => {
+        console.log(key, value);
+      }
+    );
     console.log(dataSet);
   };
 
@@ -29,15 +30,23 @@ export default HourlyWeather;
 
 /*
 .filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
+ .forEach((item, x) =>
+        console.log(item[x].day, item[x].temp, item[x].weather)
+      );
+
+      For next steps, I want to take the object map over them and return the results to an array
+///currently showing one date and temp
+ const dataSet = [].concat(
 
 
-      {dataSet.map(item => ({ temp: item.temp }))}
+const sortHourlyData = dataSet
+      .filter((item, i) => item[i])
+      .forEach((item, x) =>
+        console.log(item[x].day, item[x].temp, item[x].weather)
+      );
 
 
-      {dataSet.map(function(item) {
-          return item.temp;
-        })}
 
-            const { dataSet } = this.props;
-    dataSet.forEach(item => console.log(item));
+
+
 */
