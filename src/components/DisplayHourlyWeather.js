@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isTemplateElement } from '@babel/types';
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
   constructor(props) {
@@ -14,16 +15,26 @@ class HourlyWeather extends Component {
     await this.sortHourlyData();
   }
   sortHourlyData = () => {
-    const dataSet = Object.entries(this.state.HourlyWeather).forEach(
-      ([key, value]) => {
-        console.log(key, value);
-      }
-    );
+    const dataSet = Object.entries(this.state.HourlyWeather)
+      .map(([key, value]) => {
+        {
+          const Sorted = [].concat(value);
+
+          return Sorted;
+        }
+      })
+      .map(item => ({ time: item.dt, weather: item.weather, temp: item.temp }));
     console.log(dataSet);
+    this.setState({ HourlyWeather: dataSet });
+    console.log(this.state.HourlyWeather);
   };
 
   render() {
-    return <div>Show hourly weather</div>;
+    return (
+      <div>
+        <h1>Hourly weather</h1>
+      </div>
+    );
   }
 }
 export default HourlyWeather;
@@ -33,7 +44,7 @@ export default HourlyWeather;
  .forEach((item, x) =>
         console.log(item[x].day, item[x].temp, item[x].weather)
       );
-
+.map(item => ({ temp: item.temp, time: item.dt, weather: item.weather }));
       For next steps, I want to take the object map over them and return the results to an array
 ///currently showing one date and temp
  const dataSet = [].concat(

@@ -13,8 +13,10 @@ The child then calls this function at some point and passes it a value that the 
 We then write the functionality for the parent's reaction inside the parent component.
 
 working on trying to show hourly information for temperature
-have data saved over from state into new component.
-currently trying to map over data but dataset isn't being updated
---below was a suggestion for saving the state into a new variable for saving
-https://stackoverflow.com/questions/43572436/sort-an-array-of-objects-in-react-and-render-them
+following this which is Object.entries()
+https://stackoverflow.com/questions/54665122/reactjs-iterate-through-state-array-with-dynamic-key-with-its-data
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+
+this converted my json object into a more useable data structure
+I think I can now use .map to iterate over the data.
  ////   
