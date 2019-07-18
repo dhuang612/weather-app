@@ -16,20 +16,20 @@ class HourlyWeather extends Component {
     await this.sortHourlyData();
   }
   sortHourlyData = () => {
-    const dataSet = Object.entries(this.state.HourlyWeather).map(
-      ([key, value]) => {
+    let storedData = [];
+    const dataSet = Object.entries(this.state.HourlyWeather)
+      .map(([key, value]) => {
         {
-          const DataSorted = [].concat(value);
-          const storedData = [];
+          let DataSorted = [].concat(value);
+
           storedData.push(DataSorted);
-          return storedData;
         }
-      }
-    );
-
-    console.log(dataSet);
+        return storedData;
+      })
+      .map((item, index) => {
+        console.log(item[index]);
+      });
   };
-
   render() {
     return (
       <div>
