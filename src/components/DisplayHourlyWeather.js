@@ -6,6 +6,7 @@ class HourlyWeather extends Component {
     super(props);
     this.state = {
       HourlyWeather: this.props,
+
       tempArr: [],
       timeArr: [],
       weatherArr: []
@@ -15,18 +16,18 @@ class HourlyWeather extends Component {
     await this.sortHourlyData();
   }
   sortHourlyData = () => {
-    const dataSet = Object.entries(this.state.HourlyWeather)
-      .map(([key, value]) => {
+    const dataSet = Object.entries(this.state.HourlyWeather).map(
+      ([key, value]) => {
         {
-          const Sorted = [].concat(value);
-
-          return Sorted;
+          const DataSorted = [].concat(value);
+          const storedData = [];
+          storedData.push(DataSorted);
+          return storedData;
         }
-      })
-      .map(item => ({ time: item.dt, weather: item.weather, temp: item.temp }));
+      }
+    );
+
     console.log(dataSet);
-    this.setState({ HourlyWeather: dataSet });
-    console.log(this.state.HourlyWeather);
   };
 
   render() {
