@@ -19,4 +19,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 this converted my json object into a more useable data structure
 I think I can now use .map to iterate over the data.
+
+
+edwardmsmithToday at 6:15 PM
+Object.entries("this is fun").map(h => h[1]).join('')
  ////   

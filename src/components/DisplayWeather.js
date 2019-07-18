@@ -111,7 +111,7 @@ array.forEach
         </div>
       );
     } else {
-      return <HourlyWeather {...this.state.hourlyWeather} />;
+      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
     }
   }
 }

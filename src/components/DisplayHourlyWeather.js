@@ -26,10 +26,15 @@ class HourlyWeather extends Component {
         }
         return storedData;
       })
-      .map((item, index) => {
-        console.log(item[index]);
-      });
+      .map((item, index) => ({
+        temp: item[index].temp,
+        time: item[index].dt,
+        weather: item[index].weather
+      }));
+
+    console.log(dataSet);
   };
+
   render() {
     return (
       <div>
