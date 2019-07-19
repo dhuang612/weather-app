@@ -17,22 +17,23 @@ class HourlyWeather extends Component {
   }
   sortHourlyData = () => {
     let storedData = [];
-    const dataSet = Object.entries(this.state.HourlyWeather)
-      .map(([key, value]) => {
+    const dataSet = Object.entries(this.state.HourlyWeather).map(
+      ([key, value]) => {
         {
           let DataSorted = [].concat(value);
-
-          storedData.push(DataSorted);
+          return DataSorted;
+          // storedData.push(DataSorted);
         }
-        return storedData;
-      })
-      .map((item, index) => ({
-        temp: item[index].temp,
-        time: item[index].dt,
-        weather: item[index].weather
-      }));
-
+      }
+    );
     console.log(dataSet);
+    const deconstructData = dataSet.map(item => {
+      for (let i = 0; i < dataSet[0].length; i++) {
+        console.log(item[i].temp);
+      }
+    });
+
+    console.log(deconstructData);
   };
 
   render() {
@@ -46,10 +47,13 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
+.map(({ dt, weather, temp }) => ({ dt, weather, temp }));
+ .map({ time: dt, currweather: weather, currtemp: temp });
 .filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
  .forEach((item, x) =>
         console.log(item[x].day, item[x].temp, item[x].weather)
       );
+    .map((item, index) => console.log(item));   
 .map(item => ({ temp: item.temp, time: item.dt, weather: item.weather }));
       For next steps, I want to take the object map over them and return the results to an array
 ///currently showing one date and temp
