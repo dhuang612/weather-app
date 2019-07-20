@@ -17,6 +17,10 @@ class HourlyWeather extends Component {
   }
   sortHourlyData = () => {
     let storedData = [];
+    const weather = [];
+    const temp = [];
+    const time = [];
+
     const dataSet = Object.entries(this.state.HourlyWeather).map(
       ([key, value]) => {
         {
@@ -27,13 +31,25 @@ class HourlyWeather extends Component {
       }
     );
     console.log(dataSet);
-    const deconstructData = dataSet.map(item => {
-      for (let i = 0; i < dataSet[0].length; i++) {
-        console.log(item[i].temp);
+    const deconstructData = dataSet[0].map((item, index) => ({
+      temp: item.temp,
+      time: item.dt,
+      weather: item.weather
+    }));
+    for (let i = 0; i < deconstructData.length; i++) {
+      if (deconstructData.temp) {
+        weather.push(deconstructData.temp);
+        console.log(weather);
       }
-    });
-
+    }
     console.log(deconstructData);
+
+    this.setState({
+      tempArr: deconstructData.temp,
+      timeArr: deconstructData.time,
+      weatherArr: deconstructData.weather
+    });
+    console.log(this.state.tempArr, this.state.timeArr, this.state.weatherArr);
   };
 
   render() {
@@ -47,25 +63,14 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
-.map(({ dt, weather, temp }) => ({ dt, weather, temp }));
- .map({ time: dt, currweather: weather, currtemp: temp });
-.filter(item => item.dt_txt.indexOf(this.curday('-') > -1))
- .forEach((item, x) =>
-        console.log(item[x].day, item[x].temp, item[x].weather)
-      );
-    .map((item, index) => console.log(item));   
-.map(item => ({ temp: item.temp, time: item.dt, weather: item.weather }));
-      For next steps, I want to take the object map over them and return the results to an array
-///currently showing one date and temp
- const dataSet = [].concat(
-
-
-const sortHourlyData = dataSet
-      .filter((item, i) => item[i])
-      .forEach((item, x) =>
-        console.log(item[x].day, item[x].temp, item[x].weather)
-      );
-
+current working code
+////////////
+ const deconstructData = dataSet.map(item => {
+      for (let i = 0; i < dataSet[0].length; i++) {
+        console.log(item[i].temp);
+      }
+    });
+///////////////
 
 
 
