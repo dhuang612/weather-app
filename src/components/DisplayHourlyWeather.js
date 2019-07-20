@@ -17,39 +17,30 @@ class HourlyWeather extends Component {
   }
   sortHourlyData = () => {
     let storedData = [];
-    const weather = [];
-    const temp = [];
-    const time = [];
 
+    //getting info from state and putting information into array.
     const dataSet = Object.entries(this.state.HourlyWeather).map(
       ([key, value]) => {
         {
-          let DataSorted = [].concat(value);
-          return DataSorted;
+          const DataSorted = [].concat(value);
           // storedData.push(DataSorted);
+          return DataSorted;
         }
       }
     );
-    console.log(dataSet);
-    const deconstructData = dataSet[0].map((item, index) => ({
-      temp: item.temp,
-      time: item.dt,
-      weather: item.weather
-    }));
-    for (let i = 0; i < deconstructData.length; i++) {
-      if (deconstructData.temp) {
-        weather.push(deconstructData.temp);
-        console.log(weather);
-      }
-    }
-    console.log(deconstructData);
 
-    this.setState({
-      tempArr: deconstructData.temp,
-      timeArr: deconstructData.time,
-      weatherArr: deconstructData.weather
+    console.log(dataSet);
+    const deconstructData = dataSet[0].map((item, index) => {
+      const weather = [];
+      const temp = [];
+      const time = [];
+      for (let values of dataSet[0].values()) {
+        console.log(values.temp, values.dt, values.weather);
+      }
     });
-    console.log(this.state.tempArr, this.state.timeArr, this.state.weatherArr);
+    this.setState({ weatherArr: [deconstructData.weather] });
+    console.log(this.state.weatherArr);
+    //next steps get data from new object and sort into arrays to save in state.
   };
 
   render() {
@@ -71,7 +62,12 @@ current working code
       }
     });
 ///////////////
-
+//getting values inside an obj
+ for (key in dataSet) {
+            if (dataSet.hasOwnProperty(key)) {
+              console.log(value[index], value[index]);
+            }
+          }
 
 
 

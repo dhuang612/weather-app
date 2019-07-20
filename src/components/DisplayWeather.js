@@ -33,8 +33,7 @@ class DisplayWeather extends Component {
   }
   fetchWeatherData = async () => {
     try {
-      const api_call = await axios.get(url);
-      const response = await api_call;
+      const response = await axios.get(url);
       this.sortData(response.data);
     } catch (err) {
       console.log(err);
