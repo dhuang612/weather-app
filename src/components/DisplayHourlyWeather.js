@@ -7,15 +7,18 @@ class HourlyWeather extends Component {
     this.state = {
       HourlyWeather: this.props,
 
-      tempArr: [],
-      timeArr: [],
-      weatherArr: []
+      tempData: [],
+      timeData: [],
+      weatherData: []
     };
   }
   async componentDidMount() {
     await this.sortHourlyData();
   }
-  sortHourlyData = () => {
+  onlyUnique = (value, index, self) => {
+    return self.indexOf(value) === index;
+  };
+  sortHourlyData = data => {
     let storedData = [];
 
     //getting info from state and putting information into array.
@@ -34,12 +37,19 @@ class HourlyWeather extends Component {
       const weather = [];
       const temp = [];
       const time = [];
+      //this is taking the values inside the object and pushing them to different arrays
       for (let values of dataSet[0].values()) {
-        console.log(values.temp, values.dt, values.weather);
+        console.log(values);
+        temp.push(values.temp);
+        weather.push(values.weather);
+        time.push(values.dt);
       }
+
+      return { tempArr: temp, weatherArr: weather, timeArr: time };
     });
-    this.setState({ weatherArr: [deconstructData.weather] });
-    console.log(this.state.weatherArr);
+
+    console.log(deconstructData);
+
     //next steps get data from new object and sort into arrays to save in state.
   };
 
@@ -62,13 +72,13 @@ current working code
       }
     });
 ///////////////
-//getting values inside an obj
- for (key in dataSet) {
-            if (dataSet.hasOwnProperty(key)) {
-              console.log(value[index], value[index]);
-            }
-          }
-
-
+for (let values of dataSet[0].values()) {
+        temp.push(values.temp);
+        weather.push(values.weather);
+        time.push(values.dt);
+        this.setState({
+          tempData: dataSet.temp
+        });
+      }
 
 */
