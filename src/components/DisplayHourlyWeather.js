@@ -6,12 +6,7 @@ class HourlyWeather extends Component {
     super(props);
     this.state = {
       HourlyWeather: this.props,
-
-      sortedHourlyWeather: {
-        temp: '',
-        time: '',
-        weather: ''
-      }
+      HourlyData: []
     };
   }
   async componentDidMount() {
@@ -32,11 +27,9 @@ class HourlyWeather extends Component {
       weather.push(value.weather);
     }
 
-    return { temp: temp, time: time, weather: weather };
+    return [...temp, ...weather, ...time];
   };
-  onlyUnique = (value, index, self) => {
-    return self.indexOf(value) === index;
-  };
+
   sortHourlyData = data => {
     let storedData = [];
 
@@ -46,32 +39,35 @@ class HourlyWeather extends Component {
         {
           const DataSorted = [].concat(value);
           // storedData.push(DataSorted);
+
           return DataSorted;
         }
       }
     );
+    this.setState({ HourlyData: dataSet });
 
-    console.log(dataSet);
-    const deconstructData = Array.from(dataSet[0], this.sortValues);
-    console.log(deconstructData);
-    for (let i = 0; i < deconstructData.length; i++) {
-      this.setState({
-        sortedHourlyWeather: {
-          temp: [...deconstructData[i].temp],
-          time: [...deconstructData[i].time],
-          weather: [...deconstructData[i].weather]
-        }
-      });
-    }
-
-    console.log(this.state.sortedHourlyWeather);
     //next steps get data from new object and sort into arrays to save in state.
   };
 
   render() {
+    console.log(this.state.HourlyData);
+    const { HourlyData } = this.state;
     return (
       <div>
         <h1>Hourly weather</h1>
+        {this.state.HourlyData.map(item => {
+          return (
+            <div>
+              {' '}
+              {item[0].day}
+              <br />
+              <span>{item[0].temp}</span>
+              <br />
+              <span>{item[0].dt}</span>
+            </div>
+          );
+        })}
+        <div />
       </div>
     );
   }
@@ -99,10 +95,25 @@ current working code
       }
     }
 
+    for (let i = 0; i < deconstructData.length; i++) {
+      this.setState({
+        sortedHourlyWeather: {
+          temp: [...deconstructData[i].temp],
+          time: [...deconstructData[i].time],
+          weather: [...deconstructData[i].weather]
+        }
+      });
+    }
+     const deconstructData = Array.from(dataSet[0], this.sortValues);
+    console.log(deconstructData);
 
+return { temp: temp, time: time, weather: weather };
 
+this.setState({ hourly: arrayOfHourlyData })
+and then you use this.state.hourly.map() in your render function
 
-
-
+{this.state.HourlyData.map(function(item) {
+          return console.log(item);
+        })}
 
 */
