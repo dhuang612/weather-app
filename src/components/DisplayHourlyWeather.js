@@ -7,14 +7,33 @@ class HourlyWeather extends Component {
     this.state = {
       HourlyWeather: this.props,
 
-      tempData: [],
-      timeData: [],
-      weatherData: []
+      sortedHourlyWeather: {
+        temp: '',
+        time: '',
+        weather: ''
+      }
     };
   }
   async componentDidMount() {
     await this.sortHourlyData();
   }
+  sortValues = value => {
+    let temp = [];
+    let weather = [];
+    let time = [];
+
+    if (value.temp) {
+      temp.push(value.temp);
+    }
+    if (value.dt) {
+      time.push(value.dt);
+    }
+    if (value.weather) {
+      weather.push(value.weather);
+    }
+
+    return { temp: temp, time: time, weather: weather };
+  };
   onlyUnique = (value, index, self) => {
     return self.indexOf(value) === index;
   };
@@ -33,23 +52,19 @@ class HourlyWeather extends Component {
     );
 
     console.log(dataSet);
-    const deconstructData = dataSet[0].map((item, index) => {
-      const weather = [];
-      const temp = [];
-      const time = [];
-      //this is taking the values inside the object and pushing them to different arrays
-      for (let values of dataSet[0].values()) {
-        console.log(values);
-        temp.push(values.temp);
-        weather.push(values.weather);
-        time.push(values.dt);
-      }
-
-      return { tempArr: temp, weatherArr: weather, timeArr: time };
-    });
-
+    const deconstructData = Array.from(dataSet[0], this.sortValues);
     console.log(deconstructData);
+    for (let i = 0; i < deconstructData.length; i++) {
+      this.setState({
+        sortedHourlyWeather: {
+          temp: [...deconstructData[i].temp],
+          time: [...deconstructData[i].time],
+          weather: [...deconstructData[i].weather]
+        }
+      });
+    }
 
+    console.log(this.state.sortedHourlyWeather);
     //next steps get data from new object and sort into arrays to save in state.
   };
 
@@ -72,13 +87,22 @@ current working code
       }
     });
 ///////////////
-for (let values of dataSet[0].values()) {
-        temp.push(values.temp);
-        weather.push(values.weather);
-        time.push(values.dt);
-        this.setState({
-          tempData: dataSet.temp
-        });
+   for (let i = 0; i < deconstructData.length; i++) {
+      for (let x = 0; x < deconstructData[i].length; x++) {
+        for (let values of deconstructData) {
+          this.setState({
+            tempData: [...deconstructData[i][x].temp],
+            timeData: deconstructData.time,
+            weatherData: deconstructData.weather
+          });
+        }
       }
+    }
+
+
+
+
+
+
 
 */
