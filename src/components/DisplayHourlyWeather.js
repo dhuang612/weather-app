@@ -31,8 +31,6 @@ class HourlyWeather extends Component {
   };
 
   sortHourlyData = data => {
-    let storedData = [];
-
     //getting info from state and putting information into array.
     const dataSet = Object.entries(this.state.HourlyWeather).map(
       ([key, value]) => {
@@ -44,6 +42,13 @@ class HourlyWeather extends Component {
         }
       }
     );
+
+    const AddIdToSortedData = dataSet[0].forEach((item, i) => {
+      item.id = i + 1;
+
+      console.log(dataSet);
+    });
+
     this.setState({ HourlyData: dataSet });
 
     //next steps get data from new object and sort into arrays to save in state.
@@ -138,5 +143,9 @@ and then you use this.state.hourly.map() in your render function
 {this.state.HourlyData.map(function(item) {
           return console.log(item);
         })}
+  for (let x = 0; x < dataSet.length; x++) {
+        dataSet[x][i].id = i + 1;
+
+
 
 */

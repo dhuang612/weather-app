@@ -74,6 +74,7 @@ array.forEach
         dt: this.convertTimefromUnix(item.dt),
         weather: item.weather[0].main
       }));
+
     console.log(sortedData);
     this.setState({
       currentforecast: sortedData[0].temp,
