@@ -55,18 +55,41 @@ class HourlyWeather extends Component {
     return (
       <div>
         <h1>Hourly weather</h1>
-        {this.state.HourlyData.map(item => {
-          return (
-            <div>
-              {' '}
-              {item[0].day}
-              <br />
-              <span>{item[0].temp}</span>
-              <br />
-              <span>{item[0].dt}</span>
-            </div>
-          );
+        {HourlyData.map((item, index) => {
+          let x = 0;
+          while (x < HourlyData.length) {
+            index++;
+            return (
+              <div key={item.id} className="ui center aligned container">
+                <table class="ui basic table">
+                  <thead>
+                    <tr>
+                      <th>Current Time</th>
+                      <th>Current Temp</th>
+                      <th>Current Weather</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{item[index].dt}</td>
+                      <td>{item[index].temp}</td>
+                      <td>{item[index].weather}</td>
+                    </tr>
+                    <tr>
+                      <td>{item[index].dt}</td>
+                      <td>{item[index].temp}</td>
+                      <td>{item[index].weather}</td>
+                    </tr>
+
+                    <tr />
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+          x++;
         })}
+        ;
         <div />
       </div>
     );
