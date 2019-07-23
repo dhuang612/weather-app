@@ -49,7 +49,7 @@ class HourlyWeather extends Component {
       console.log(dataSet);
     });
 
-    this.setState({ HourlyData: dataSet });
+    this.setState({ HourlyData: dataSet[0] });
 
     //next steps get data from new object and sort into arrays to save in state.
   };
@@ -61,40 +61,32 @@ class HourlyWeather extends Component {
       <div>
         <h1>Hourly weather</h1>
         {HourlyData.map((item, index) => {
-          let x = 0;
-          while (x < HourlyData.length) {
-            index++;
-            return (
-              <div key={item.id} className="ui center aligned container">
-                <table class="ui basic table">
-                  <thead>
-                    <tr>
-                      <th>Current Time</th>
-                      <th>Current Temp</th>
-                      <th>Current Weather</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{item[index].dt}</td>
-                      <td>{item[index].temp}</td>
-                      <td>{item[index].weather}</td>
-                    </tr>
-                    <tr>
-                      <td>{item[index].dt}</td>
-                      <td>{item[index].temp}</td>
-                      <td>{item[index].weather}</td>
-                    </tr>
+          console.log(HourlyData);
 
-                    <tr />
-                  </tbody>
-                </table>
-              </div>
-            );
-          }
-          x++;
+          return (
+            <div className="ui container">
+              <table className="ui  table">
+                <thead>
+                  <tr className="center aligned">
+                    <th className="center aligned">time</th>
+                    <th className="center aligned">temperature</th>
+                    <th className="center aligned">weather</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="center aligned">
+                    <td key={item.id} className="center aligned">
+                      {item.dt}
+                    </td>
+                    <td className="center aligned">{item.temp}</td>
+                    <td className="center aligned">{item.weather}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          );
         })}
-        ;
+
         <div />
       </div>
     );
