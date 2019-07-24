@@ -12,23 +12,6 @@ class HourlyWeather extends Component {
   async componentDidMount() {
     await this.sortHourlyData();
   }
-  sortValues = value => {
-    let temp = [];
-    let weather = [];
-    let time = [];
-
-    if (value.temp) {
-      temp.push(value.temp);
-    }
-    if (value.dt) {
-      time.push(value.dt);
-    }
-    if (value.weather) {
-      weather.push(value.weather);
-    }
-
-    return [...temp, ...weather, ...time];
-  };
 
   sortHourlyData = data => {
     //getting info from state and putting information into array.
@@ -69,6 +52,13 @@ class HourlyWeather extends Component {
                     <th className="center aligned">time</th>
                     <th className="center aligned">temperature</th>
                     <th className="center aligned">weather</th>
+                    <img
+                      src={
+                        'http://openweathermap.org/img/wn/' +
+                        item.weatherIcon +
+                        '.png'
+                      }
+                    />
                   </tr>
                 </thead>
                 <tbody>

@@ -10,7 +10,7 @@ const PATH_BASE = 'https://api.openweathermap.org/';
 const REQ_PATH = 'data/2.5/forecast?';
 const cityID = '5128638';
 const units = 'imperial';
-const cnt = 20;
+const cnt = 10;
 const url = `${PATH_BASE}${REQ_PATH}id=${cityID}&APPID=${
   process.env.REACT_APP_WEATHER_API_KEY
 }&units=${units}&cnt=${cnt}`;
@@ -23,7 +23,8 @@ class DisplayWeather extends Component {
       currentforecast: '',
       currenttime: '',
       currentweather: '',
-      hourlyWeather: []
+      hourlyWeather: [],
+      weatherIcon: ''
     };
   }
   async componentDidMount() {
@@ -71,7 +72,8 @@ array.forEach
         day: item.dt_txt,
         temp: item.main.temp,
         dt: this.convertTimefromUnix(item.dt),
-        weather: item.weather[0].main
+        weather: item.weather[0].main,
+        weatherIcon: item.weather[0].icon
       }));
 
     console.log(sortedData);
@@ -79,7 +81,8 @@ array.forEach
       currentforecast: sortedData[0].temp,
       currenttime: sortedData[0].dt,
       currentweather: sortedData[0].weather,
-      hourlyWeather: [...sortedData]
+      hourlyWeather: [...sortedData],
+      weatherIcon: sortedData[0].weatherIcon
     });
   };
   hourlyWeatherData = sortedData => {
@@ -101,11 +104,38 @@ array.forEach
     const { showHourlyWeather } = this.state;
     if (this.state.showHourlyWeather) {
       return (
-        <div className="weather">
+        <div className="ui container">
           <h1>Current temperature</h1>
-          <div className="day">{this.state.currenttime}</div>
-          {this.state.currentforecast}
-          <div>{this.state.currentweather}</div>
+          <table class="ui basic table">
+            <thead>
+              <tr>
+                <th> time</th>
+                <th> temp</th>
+                <th> weather</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div className="day">{this.state.currenttime}</div>
+                </td>
+                <td>{this.state.currentforecast}</td>
+                <div>
+                  <td>
+                    {' '}
+                    <img
+                      src={
+                        'http://openweathermap.org/img/wn/' +
+                        this.state.weatherIcon +
+                        '.png'
+                      }
+                    />
+                    {this.state.currentweather}
+                  </td>
+                </div>
+              </tr>
+            </tbody>
+          </table>
           <button onClick={this.switchToHourly}>show hourly temperature</button>
         </div>
       );
