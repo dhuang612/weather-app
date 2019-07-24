@@ -61,11 +61,9 @@ class HourlyWeather extends Component {
       <div>
         <h1>Hourly weather</h1>
         {HourlyData.map((item, index) => {
-          console.log(HourlyData);
-
           return (
             <div className="ui container">
-              <table className="ui  table">
+              <table className="ui basic table">
                 <thead>
                   <tr className="center aligned">
                     <th className="center aligned">time</th>
@@ -86,8 +84,6 @@ class HourlyWeather extends Component {
             </div>
           );
         })}
-
-        <div />
       </div>
     );
   }

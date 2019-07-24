@@ -20,7 +20,6 @@ class DisplayWeather extends Component {
     super(props);
     this.state = {
       showHourlyWeather: false,
-      hourlyWeather: '',
       currentforecast: '',
       currenttime: '',
       currentweather: '',
