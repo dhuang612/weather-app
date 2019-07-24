@@ -16,9 +16,7 @@ next thing I want to work on is adding in a location where people can search
 for a city and get the api to make a new call out and get additional information
 ->
 store data in some sort of local storage?
-add in weather icons for a more accurate description
 
-get a table or something to hold the data for the current temperature information
 
 errors:
 
