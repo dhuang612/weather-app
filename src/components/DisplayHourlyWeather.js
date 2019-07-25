@@ -48,26 +48,28 @@ class HourlyWeather extends Component {
             <div className="ui container">
               <table className="ui basic table">
                 <thead>
-                  <tr className="center aligned">
-                    <th className="center aligned">time</th>
-                    <th className="center aligned">temperature</th>
-                    <th className="center aligned">weather</th>
-                    <img
-                      src={
-                        'http://openweathermap.org/img/wn/' +
-                        item.weatherIcon +
-                        '.png'
-                      }
-                    />
+                  <tr className="center aligned six wide">
+                    <th className="center aligned six wide">time</th>
+                    <th className="center aligned six wide">temperature</th>
+                    <th className="center aligned six wide">weather</th>
+                    <th className="center aligned six wide">
+                      <img
+                        src={
+                          'https://openweathermap.org/img/wn/' +
+                          item.weatherIcon +
+                          '.png'
+                        }
+                      />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="center aligned">
-                    <td key={item.id} className="center aligned">
+                    <td key={item.id} className="center aligned six wide">
                       {item.dt}
                     </td>
-                    <td className="center aligned">{item.temp}</td>
-                    <td className="center aligned">{item.weather}</td>
+                    <td className="center aligned six wide">{item.temp}</td>
+                    <td className="center aligned six wide">{item.weather}</td>
                   </tr>
                 </tbody>
               </table>
@@ -89,40 +91,6 @@ current working code
       }
     });
 ///////////////
-   for (let i = 0; i < deconstructData.length; i++) {
-      for (let x = 0; x < deconstructData[i].length; x++) {
-        for (let values of deconstructData) {
-          this.setState({
-            tempData: [...deconstructData[i][x].temp],
-            timeData: deconstructData.time,
-            weatherData: deconstructData.weather
-          });
-        }
-      }
-    }
-
-    for (let i = 0; i < deconstructData.length; i++) {
-      this.setState({
-        sortedHourlyWeather: {
-          temp: [...deconstructData[i].temp],
-          time: [...deconstructData[i].time],
-          weather: [...deconstructData[i].weather]
-        }
-      });
-    }
-     const deconstructData = Array.from(dataSet[0], this.sortValues);
-    console.log(deconstructData);
-
-return { temp: temp, time: time, weather: weather };
-
-this.setState({ hourly: arrayOfHourlyData })
-and then you use this.state.hourly.map() in your render function
-
-{this.state.HourlyData.map(function(item) {
-          return console.log(item);
-        })}
-  for (let x = 0; x < dataSet.length; x++) {
-        dataSet[x][i].id = i + 1;
 
 
 

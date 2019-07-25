@@ -122,10 +122,9 @@ array.forEach
                 <td>{this.state.currentforecast}</td>
                 <div>
                   <td>
-                    {' '}
                     <img
                       src={
-                        'http://openweathermap.org/img/wn/' +
+                        'https://openweathermap.org/img/wn/' +
                         this.state.weatherIcon +
                         '.png'
                       }

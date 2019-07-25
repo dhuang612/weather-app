@@ -19,6 +19,8 @@ store data in some sort of local storage?
 
 
 errors:
+take a look at the weather image placement since 
+it isn't really fitting in it's own block
 
 currently the center temperature area within the hourly table
 shows crooked
