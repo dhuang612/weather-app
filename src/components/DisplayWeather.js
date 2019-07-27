@@ -24,7 +24,8 @@ class DisplayWeather extends Component {
       currenttime: '',
       currentweather: '',
       hourlyWeather: [],
-      weatherIcon: ''
+      weatherIcon: '',
+      location: ''
     };
   }
   async componentDidMount() {
@@ -85,7 +86,7 @@ array.forEach
       weatherIcon: sortedData[0].weatherIcon
     });
   };
-  hourlyWeatherData = sortedData => {
+  hourlyWeatherData = () => {
     const { hourlyWeather } = this.state;
     console.log(hourlyWeather);
   };
@@ -135,7 +136,11 @@ array.forEach
               </tr>
             </tbody>
           </table>
-          <button onClick={this.switchToHourly}>show hourly temperature</button>
+          Please put in location for weather information <br />
+          <input type="text" name="location" /> <br />
+          <button onClick={this.switchToHourly}>
+            switch to hourly weather
+          </button>
         </div>
       );
     } else {
