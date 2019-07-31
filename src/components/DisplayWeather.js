@@ -22,9 +22,8 @@ class DisplayWeather extends Component {
       country: ''
     };
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.switchToHourly();
-    await this.fetchWeatherData();
   }
 
   fetchWeatherData = async e => {
@@ -36,7 +35,7 @@ class DisplayWeather extends Component {
     const units = 'imperial';
     const cnt = 10;
 
-    const url = await `${PATH_BASE}${REQ_PATH}q=${city},${country}&APPID=${
+    const url = `${PATH_BASE}${REQ_PATH}q=${city},${country}&APPID=${
       process.env.REACT_APP_WEATHER_API_KEY
     }&units=${units}&cnt=${cnt}`;
     const response = await axios.get(url);
@@ -102,16 +101,19 @@ array.forEach
       currentforecast,
       currenttime,
       currentweather,
-      hourlyWeather
+      hourlyWeather,
+      showHourlyWeather
     } = this.state;
-    const { showHourlyWeather } = this.state;
-    if (!this.city) {
+
+    if (!this.state.currentweather) {
       return (
         <div>
           <Form loadWeather={this.fetchWeatherData} />
         </div>
       );
-    } else if (this.city) {
+    } else if (!this.state.showHourlyWeather) {
+      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
+    } else {
       return (
         <div className="ui container">
           <br />
@@ -150,8 +152,6 @@ array.forEach
           </button>
         </div>
       );
-    } else {
-      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
     }
   }
 }

@@ -83,14 +83,6 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
-current working code
-////////////
- const deconstructData = dataSet.map(item => {
-      for (let i = 0; i < dataSet[0].length; i++) {
-        console.log(item[i].temp);
-      }
-    });
-///////////////
 
 
 
