@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import HourlyWeather from '../components/DisplayHourlyWeather';
+import Form from './form';
 import axios from 'axios';
 import './DisplayWeather.css';
 
@@ -16,44 +18,29 @@ class DisplayWeather extends Component {
       currentweather: '',
       hourlyWeather: [],
       weatherIcon: '',
-      cityname: ''
+      city: '',
+      country: ''
     };
   }
   async componentDidMount() {
     this.switchToHourly();
     await this.fetchWeatherData();
   }
-  componentDidUpdate() {
-    // this.fetchWeatherData();
-  }
 
-  fetchWeatherData = async () => {
+  fetchWeatherData = async e => {
     const PATH_BASE = 'https://api.openweathermap.org/';
     const REQ_PATH = 'data/2.5/forecast?';
-    let cityname = '';
-    const country = 'US';
+    const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+    e.preventDefault();
     const units = 'imperial';
     const cnt = 10;
-    const url = `${PATH_BASE}${REQ_PATH}q=${cityname},${country}&APPID=${
+
+    const url = await `${PATH_BASE}${REQ_PATH}q=${city},${country}&APPID=${
       process.env.REACT_APP_WEATHER_API_KEY
     }&units=${units}&cnt=${cnt}`;
-
-    try {
-      const response = await axios.get(url);
-      this.sortData(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
-      const searchedcity = this.state.cityname;
-      let cityname = searchedcity;
-      console.log(cityname);
-      const response = await axios.get(url);
-      this.sortData(response.data);
-    } catch (err) {
-      console.log(err);
-    }
+    const response = await axios.get(url);
+    this.sortData(response.data);
   };
 
   convertTimefromUnix = dt => {
@@ -105,12 +92,7 @@ array.forEach
     const { hourlyWeather } = this.state;
     console.log(hourlyWeather);
   };
-  handleChange = e => {
-    this.setState({ cityname: e.target.value });
-  };
-  onSubmit = e => {
-    e.preventDefault();
-  };
+
   switchToHourly = () => {
     this.setState({ showHourlyWeather: !this.state.showHourlyWeather });
   };
@@ -123,7 +105,13 @@ array.forEach
       hourlyWeather
     } = this.state;
     const { showHourlyWeather } = this.state;
-    if (this.state.cityname) {
+    if (!this.city) {
+      return (
+        <div>
+          <Form loadWeather={this.fetchWeatherData} />
+        </div>
+      );
+    } else if (this.city) {
       return (
         <div className="ui container">
           <br />
@@ -161,20 +149,6 @@ array.forEach
             switch to hourly weather
           </button>
         </div>
-      );
-    } else if (this.state.cityname === '') {
-      return (
-        <form onSubmit={this.onSubmit}>
-          Please enter US city name for weather information <br />
-          <label htmlFor="cityname">City name</label>
-          <input
-            type="text"
-            name="name"
-            value={this.state.cityname}
-            onChange={this.handleChange}
-            onSubmit={() => this.onSubmit}
-          />
-        </form>
       );
     } else {
       return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
