@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import Sidebar from './sidebar';
+//what?? need to see when this was added.
 import { isTemplateElement } from '@babel/types';
+import DisplayWeather from './DisplayWeather';
+
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
   constructor(props) {
@@ -43,6 +47,7 @@ class HourlyWeather extends Component {
     return (
       <div>
         <h1>Hourly weather</h1>
+        <Sidebar />
         {HourlyData.map((item, index) => {
           return (
             <div className="ui container">
@@ -83,7 +88,7 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
-
+You aren't settingthe 
 
 
 */

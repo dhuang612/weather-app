@@ -118,6 +118,7 @@ array.forEach
         <div className="ui container">
           <br />
           <h1>Current temperature</h1>
+
           <table class="ui basic table">
             <thead>
               <tr>

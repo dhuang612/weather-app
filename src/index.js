@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import DisplayWeather from './components/DisplayWeather';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
