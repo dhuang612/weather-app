@@ -10,7 +10,10 @@ class HourlyWeather extends Component {
     super(props);
     this.state = {
       HourlyWeather: this.props,
-      HourlyData: []
+      currentweather: this.props,
+      HourlyData: [],
+      showCurrentWeather: false,
+      currenttime: this.props
     };
   }
   async componentDidMount() {
@@ -40,49 +43,66 @@ class HourlyWeather extends Component {
 
     //next steps get data from new object and sort into arrays to save in state.
   };
+  switchToCurrent = () => {
+    this.setState({
+      showCurrentWeather: !this.state.showCurrentWeather
+    });
+  };
+  /*
+ this.setState({ showHourlyWeather: !this.state.showHourlyWeather });
+  */
 
   render() {
-    console.log(this.state.HourlyData);
-    const { HourlyData } = this.state;
-    return (
-      <div>
-        <h1>Hourly weather</h1>
-        <Sidebar />
-        {HourlyData.map((item, index) => {
-          return (
-            <div className="ui container">
-              <table className="ui basic table">
-                <thead>
-                  <tr className="center aligned six wide">
-                    <th className="center aligned six wide">time</th>
-                    <th className="center aligned six wide">temperature</th>
-                    <th className="center aligned six wide">weather</th>
-                    <th className="center aligned six wide">
-                      <img
-                        src={
-                          'https://openweathermap.org/img/wn/' +
-                          item.weatherIcon +
-                          '.png'
-                        }
-                      />
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="center aligned">
-                    <td key={item.id} className="center aligned six wide">
-                      {item.dt}
-                    </td>
-                    <td className="center aligned six wide">{item.temp}</td>
-                    <td className="center aligned six wide">{item.weather}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          );
-        })}
-      </div>
-    );
+    const { HourlyWeather, HourlyData, showCurrentWeather } = this.state;
+
+    if (!this.state.showCurrentWeather) {
+      return (
+        <div>
+          <h1>Hourly weather</h1>
+
+          {HourlyData.map((item, index) => {
+            return (
+              <div className="ui container">
+                <table className="ui basic table">
+                  <thead>
+                    <tr className="center aligned six wide">
+                      <th className="center aligned six wide">time</th>
+                      <th className="center aligned six wide">temperature</th>
+                      <th className="center aligned six wide">weather</th>
+                      <th className="center aligned six wide">
+                        <img
+                          src={
+                            'https://openweathermap.org/img/wn/' +
+                            item.weatherIcon +
+                            '.png'
+                          }
+                        />
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="center aligned">
+                      <td key={item.id} className="center aligned six wide">
+                        {item.dt}
+                      </td>
+                      <td className="center aligned six wide">{item.temp}</td>
+                      <td className="center aligned six wide">
+                        {item.weather}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
+          <button onClick={this.switchToCurrent}>
+            return to current weather
+          </button>
+        </div>
+      );
+    } else {
+      return <Sidebar />;
+    }
   }
 }
 export default HourlyWeather;

@@ -99,7 +99,6 @@ array.forEach
   render() {
     const {
       currentforecast,
-      currenttime,
       currentweather,
       hourlyWeather,
       showHourlyWeather
@@ -112,8 +111,13 @@ array.forEach
         </div>
       );
     } else if (!this.state.showHourlyWeather) {
-      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
-    } else {
+      return (
+        <HourlyWeather
+          hourlyWeather={this.state.hourlyWeather}
+          showHourlyWeather={this.state.showHourlyWeather}
+        />
+      );
+    } else if (this.state.currentweather) {
       return (
         <div className="ui container">
           <br />

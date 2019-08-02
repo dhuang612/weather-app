@@ -31,6 +31,10 @@ add in some error checking, if someone tries to submit the form without the inpu
 
 geolocation for showing the current weather.
 -> so that the end user doesn't have to search for the current weather.
+setup urls on client side
+
+probably doesn't hurt if whatever is serving 
+it can serve the same html for all missing requests
 ///////////////////////////
 
 some css designs
@@ -42,4 +46,9 @@ right now on git it's still showing create-react-app
 digital ocean - $5 bucks
 dream host
 
+-dribbble
+ui design setup
+fullstack source 
+
+find an open source project 
  ////   
