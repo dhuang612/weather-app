@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { Router, Route, Link } from 'react-router-dom';
-import { createBrowserHistory } from './history';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import DisplayWeather from './DisplayWeather';
-const history = createBrowserHistory;
-console.log(location);
+
 class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentweatherprops: this.props
+    };
+  }
   render() {
     return (
       <div className="ui container">
-        <Router history={history}>
-          <Route component={DisplayWeather} />
+        <Router>
+          <Route
+            exact
+            path="/"
+            component={DisplayWeather}
+            currentweatherprops={this.state.currentweatherprops}
+          />
         </Router>
       </div>
     );

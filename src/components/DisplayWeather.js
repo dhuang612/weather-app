@@ -99,7 +99,7 @@ array.forEach
   render() {
     const {
       currentforecast,
-      currentweather,
+      //removed currentweather state
       hourlyWeather,
       showHourlyWeather
     } = this.state;
@@ -152,7 +152,10 @@ array.forEach
               </tr>
             </tbody>
           </table>
-          <button onClick={this.switchToHourly}>
+          <button
+            onClick={this.switchToHourly}
+            currentWeatherprops={this.state.currentweather}
+          >
             switch to hourly weather
           </button>
         </div>

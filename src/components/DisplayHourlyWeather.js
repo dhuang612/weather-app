@@ -10,7 +10,7 @@ class HourlyWeather extends Component {
     super(props);
     this.state = {
       HourlyWeather: this.props,
-      currentweather: this.props,
+      currentweatherprops: this.props,
       HourlyData: [],
       showCurrentWeather: false,
       currenttime: this.props
@@ -95,7 +95,10 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          <button onClick={this.switchToCurrent}>
+          <button
+            onClick={this.switchToCurrent}
+            currentweatherprops={this.state.currentweatherprops}
+          >
             return to current weather
           </button>
         </div>
