@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import DisplayWeather from './DisplayWeather';
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentweatherprops: this.props
+      showCurrentWeather: this.props,
+      fetchedWeatherData: this.props
     };
   }
   render() {
-    return (
-      <div className="ui container">
-        <Router>
-          <Route
-            exact
-            path="/"
-            component={DisplayWeather}
-            currentweatherprops={this.state.currentweatherprops}
-          />
-        </Router>
-      </div>
-    );
+    const { showCurrentWeather, fetchedWeatherData } = this.state;
+
+    if (this.state.showCurrentWeather) {
+      console.log(fetchedWeatherData);
+      return (
+        <div className="ui container">
+          <Router>
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { fetchedWeatherData: true }
+              }}
+            />
+          </Router>
+        </div>
+      );
+    }
   }
 }
 export default Sidebar;
@@ -39,6 +44,15 @@ re renders the component t
             Go back to current weather
           </Link>
 
-<Route exact path="/" component={DisplayWeather} />
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+  <Route
+              exact
+              path="/"
+              render={props => (
+                <DisplayWeather {...props} fetchedWeatherData={true} />
+              )}
+            />
+
 
 */

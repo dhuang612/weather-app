@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Sidebar from './sidebar';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 //what?? need to see when this was added.
 import { isTemplateElement } from '@babel/types';
 import DisplayWeather from './DisplayWeather';
+import Sidebar from './sidebar';
 
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
@@ -13,7 +14,8 @@ class HourlyWeather extends Component {
       currentweatherprops: this.props,
       HourlyData: [],
       showCurrentWeather: false,
-      currenttime: this.props
+      currenttime: this.props,
+      redirect: false
     };
   }
   async componentDidMount() {
@@ -43,9 +45,9 @@ class HourlyWeather extends Component {
 
     //next steps get data from new object and sort into arrays to save in state.
   };
-  switchToCurrent = () => {
+  handleSubmit = () => {
     this.setState({
-      showCurrentWeather: !this.state.showCurrentWeather
+      redirect: !this.state.redirect
     });
   };
   /*
@@ -53,7 +55,12 @@ class HourlyWeather extends Component {
   */
 
   render() {
-    const { HourlyWeather, HourlyData, showCurrentWeather } = this.state;
+    const {
+      HourlyWeather,
+      HourlyData,
+      showCurrentWeather,
+      redirect
+    } = this.state;
 
     if (!this.state.showCurrentWeather) {
       return (
@@ -95,23 +102,21 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          <button
-            onClick={this.switchToCurrent}
-            currentweatherprops={this.state.currentweatherprops}
-          >
+          <button onClick={this.handleSubmit} redirect={this.state.redirect}>
             return to current weather
           </button>
         </div>
       );
-    } else {
-      return <Sidebar />;
     }
   }
 }
 export default HourlyWeather;
 
 /*
-You aren't settingthe 
+clicking the button right now is returning to the top of the previous component.
+
+//else if statement to try and render current weather.
+
 
 
 */

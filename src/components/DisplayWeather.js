@@ -18,8 +18,7 @@ class DisplayWeather extends Component {
       currentweather: '',
       hourlyWeather: [],
       weatherIcon: '',
-      city: '',
-      country: ''
+      fetchedWeatherData: false
     };
   }
   componentDidMount() {
@@ -84,7 +83,8 @@ array.forEach
       currenttime: sortedData[0].dt,
       currentweather: sortedData[0].weather,
       hourlyWeather: [...sortedData],
-      weatherIcon: sortedData[0].weatherIcon
+      weatherIcon: sortedData[0].weatherIcon,
+      fetchedWeatherData: true
     });
   };
   hourlyWeatherData = () => {
@@ -99,7 +99,7 @@ array.forEach
   render() {
     const {
       currentforecast,
-      //removed currentweather state
+      fetchedWeatherData,
       hourlyWeather,
       showHourlyWeather
     } = this.state;
@@ -110,14 +110,11 @@ array.forEach
           <Form loadWeather={this.fetchWeatherData} />
         </div>
       );
-    } else if (!this.state.showHourlyWeather) {
-      return (
-        <HourlyWeather
-          hourlyWeather={this.state.hourlyWeather}
-          showHourlyWeather={this.state.showHourlyWeather}
-        />
-      );
-    } else if (this.state.currentweather) {
+    }
+    if (!this.state.showHourlyWeather) {
+      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
+    }
+    if (this.state.fetchedWeatherData) {
       return (
         <div className="ui container">
           <br />
@@ -154,7 +151,7 @@ array.forEach
           </table>
           <button
             onClick={this.switchToHourly}
-            currentWeatherprops={this.state.currentweather}
+            fetchedWeatherData={this.state.fetchedWeatherData}
           >
             switch to hourly weather
           </button>

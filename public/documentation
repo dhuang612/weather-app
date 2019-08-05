@@ -36,6 +36,19 @@ setup urls on client side
 probably doesn't hurt if whatever is serving 
 it can serve the same html for all missing requests
 ///////////////////////////
+tested sidebar which is broken.
+
+button path is also not working under hourly.
+ seems to be something with the conditional statements
+ under hourly because changing something that shows the form also 
+ makes it start with current.
+ 
+ setting state at the beginning of render which is breaking 
+ the original passing of state?
+
+I don't think I understand navigation / routing as well
+following this tutorial
+https://auth0.com/blog/react-router-4-practical-tutorial/
 
 some css designs
 
@@ -49,6 +62,7 @@ dream host
 -dribbble
 ui design setup
 fullstack source 
+
 
 find an open source project 
  ////   
