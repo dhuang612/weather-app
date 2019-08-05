@@ -4,11 +4,11 @@ import DisplayWeather from './components/DisplayWeather';
 import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import './App.css';
 
-const SwapToCurrent = ({ component: Component }) => {
+export const SwapToCurrent = ({ component: Component }) => {
   return (
     <Route
       render={props =>
-        DisplayHourlyWeather.redirect === true ? (
+        DisplayWeather.fetchedWeatherData === true ? (
           <DisplayWeather {...props} />
         ) : (
           <Redirect
@@ -34,8 +34,7 @@ class App extends React.Component {
         <h1>Weather forecast</h1>
 
         <DisplayWeather />
-        <Route path="/" exact component={DisplayWeather} />
-        <SwapToCurrent path="/current" component={DisplayWeather} />
+
         <Route path="/hourly" component={DisplayHourlyWeather} />
       </div>
     );
@@ -43,3 +42,18 @@ class App extends React.Component {
 }
 
 export default App;
+
+/*
+make a home page as a landing area?
+ <Route path="/" component={DisplayWeather} />
+
+   <Route path="/current" exact component={DisplayWeather} />
+
+
+   <Route
+          path="/current"
+          render={props => <DisplayWeather {...props} />}
+        />
+
+         <Route path="/" component={DisplayWeather} />
+*/

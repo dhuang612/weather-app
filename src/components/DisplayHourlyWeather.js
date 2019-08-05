@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 //what?? need to see when this was added.
 import { isTemplateElement } from '@babel/types';
 import DisplayWeather from './DisplayWeather';
 import Sidebar from './sidebar';
+import SwapToCurrent from '../App';
 
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
@@ -102,9 +103,7 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          <button onClick={this.handleSubmit} redirect={this.state.redirect}>
-            return to current weather
-          </button>
+          <SwapToCurrent />
         </div>
       );
     }
@@ -116,7 +115,9 @@ export default HourlyWeather;
 clicking the button right now is returning to the top of the previous component.
 
 //else if statement to try and render current weather.
+else if (!this.state.redirect) {
+      return <SwapToCurrent />;
+    }
 
-
-
+  <Link to="/current">Current weather</Link>
 */
