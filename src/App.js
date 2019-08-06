@@ -4,11 +4,15 @@ import DisplayWeather from './components/DisplayWeather';
 import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import './App.css';
 
-export const SwapToCurrent = ({ component: Component }) => {
+export const SwapToCurrent = ({
+  component: Component,
+  fetchedWeatherData,
+  ...rest
+}) => {
   return (
     <Route
       render={props =>
-        DisplayWeather.fetchedWeatherData === true ? (
+        fetchedWeatherData === 'true' ? (
           <DisplayWeather {...props} />
         ) : (
           <Redirect
@@ -22,7 +26,6 @@ export const SwapToCurrent = ({ component: Component }) => {
     />
   );
 };
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +36,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Weather forecast</h1>
 
-        <DisplayWeather />
-
+        <Route path="/" exact component={DisplayWeather} />
         <Route path="/hourly" component={DisplayHourlyWeather} />
       </div>
     );

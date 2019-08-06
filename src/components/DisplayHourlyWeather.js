@@ -47,9 +47,7 @@ class HourlyWeather extends Component {
     //next steps get data from new object and sort into arrays to save in state.
   };
   handleSubmit = () => {
-    this.setState({
-      redirect: !this.state.redirect
-    });
+    this.setState({ showHourlyWeather: !this.state.showHourlyWeather });
   };
   /*
  this.setState({ showHourlyWeather: !this.state.showHourlyWeather });
@@ -62,7 +60,6 @@ class HourlyWeather extends Component {
       showCurrentWeather,
       redirect
     } = this.state;
-
     if (!this.state.showCurrentWeather) {
       return (
         <div>
@@ -103,8 +100,18 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          <SwapToCurrent />
+          <button
+            onclick={this.handleSubmit}
+            fetchedWeatherData={this.state.fetchedWeatherData}
+          >
+            current
+          </button>
         </div>
+      );
+    }
+    if (!this.state.redirect) {
+      return (
+        <SwapToCurrent fetchedWeatherData={this.state.fetchedWeatherData} />
       );
     }
   }
@@ -112,6 +119,13 @@ class HourlyWeather extends Component {
 export default HourlyWeather;
 
 /*
+///////////////
+pass the state down as props?
+////////////
+
+  if (!this.state.showHourlyWeather) {
+      return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
+    }
 clicking the button right now is returning to the top of the previous component.
 
 //else if statement to try and render current weather.

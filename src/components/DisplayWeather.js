@@ -114,6 +114,7 @@ array.forEach
     if (!this.state.showHourlyWeather) {
       return <HourlyWeather hourlyWeather={this.state.hourlyWeather} />;
     }
+
     if (this.state.fetchedWeatherData) {
       return (
         <div className="ui container">
@@ -162,3 +163,9 @@ array.forEach
 }
 
 export default DisplayWeather;
+
+/*
+second statement is doing something similar to the third
+ \
+
+*/
